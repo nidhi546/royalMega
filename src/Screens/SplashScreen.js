@@ -1,13 +1,15 @@
 import React, {useState, useEffect, useRef} from 'react';
 import {
-  SafeAreaView,
   View,
   StyleSheet,
   Text,
   Animated,
   StatusBar,
   Platform,
+  Image,
 } from 'react-native';
+import {SafeAreaView} from 'react-native-safe-area-context';
+import images from '../Utils/images';
 
 const SplashScreen = ({navigation}) => {
   const fadeAnim = useRef(new Animated.Value(0)).current;
@@ -28,7 +30,7 @@ const SplashScreen = ({navigation}) => {
 
     const timer = setTimeout(() => {
       navigation.navigate('MainStack', {screen: 'HomeScreen'});
-    }, 4000);
+    }, 3000);
 
     fadeInAnimation.start();
 
@@ -37,13 +39,19 @@ const SplashScreen = ({navigation}) => {
     };
   }, [navigation]);
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
-      <StatusBar backgroundColor={'white'} barStyle={'dark-content'} />
+    <SafeAreaView style={{flex: 1, backgroundColor: 'black'}}>
+      <StatusBar backgroundColor={'black'} barStyle={'light-content'} />
 
-     <View style={styles.firstviewcontainer}>
-        <Animated.Text style={[styles.text, { opacity: fadeAnim }]}>
-          Hello! Welcome
-        </Animated.Text>
+      <View style={styles.firstviewcontainer}>
+        <Animated.Image
+          source={images.logo}
+          style={{
+            height: 250,
+            width: 300,
+            opacity: fadeAnim,
+          }}
+          resizeMode="contain"
+        />
       </View>
     </SafeAreaView>
   );
